@@ -1,0 +1,30 @@
+# gitignore
+
+
+node_modules/
+npm-debug.log
+
+.DS_Store
+current
+default-packages
+
+npm-shrinkwrap.json
+package-lock.json
+yarn.lock
+
+18--Ejercicios Repaso/05-ejercicios-repaso.md
+18--Ejercicios Repaso/app.js
+18--Ejercicios Repaso/coderbyte.js
+18--Ejercicios Repaso/index.html
+18--Ejercicios Repaso/resources
+Actividades Extra Propias/Ejercicio_Naves
+Actividades Extra Propias/Hundir la flota
+Actividades Extra Propias/Juego Parchis
+Actividades Extra Propias/Pizza Hug
+Extras
+Guia_Javascript.pdf
+
+
+
+
+

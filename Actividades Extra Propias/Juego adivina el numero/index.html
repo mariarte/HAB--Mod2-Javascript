@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Juego Adivina el Número</title>
+
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+      body {
+        width: 50%;
+        max-width: 800px;
+        min-width: 480px;
+        margin: 0 auto;
+      }
+      .ultimoUsado {
+        color: white;
+        padding: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Juego Adivina el Número</h1>
+
+    <p>Seleccione un número aleatorio entre 1 y 100. Tiene 10 oportunidades. Le indicaremos si el número es demasiado alto o demasiado bajo.</p>
+
+    <div class="form">
+      <label for="cajaNumero">Introduzca un número: </label>
+      <input type="text" id="cajaNumero" class="cajaNumero">
+      <input type="submit" value="Comprobar número" class="botonEnvio">
+    </div>
+
+    <div class="resultParas">
+      <p class="numerosUsados"></p>
+      <p class="ultimoUsado"></p>
+      <p class="compuebaAltoBajo"></p>
+    </div>
+
+    <script>
+      var numeroAleatorio = Math.floor(Math.random() * 100) + 1;
+
+      var numerosUsados = document.querySelector('.numerosUsados'); //guarda los ultimos números que ha ido probando el usuario
+      var ultimoUsado = document.querySelector('.ultimoUsado'); //guarda el ultimo númeror usado por el usuario
+      var compuebaAltoBajo = document.querySelector('.compuebaAltoBajo'); //guarda un valor si el número usado es mas alto o mas bajo del número que se busca
+
+      var botonEnvio = document.querySelector('.botonEnvio');
+      var cajaNumero = document.querySelector('.cajaNumero');
+
+      var contadorIntentos = 1; //guarda el número de intentos 
+      var botonReset;
+      //cajaNumero.focus(); //pone el foco en la caja de texto
+      
+      function compruebaNumero() {
+        var numeroIntroducido = Number(cajaNumero.value);
+        if (contadorIntentos === 1) {
+          numerosUsados.textContent = 'Números usados: ';
+        }
+        numerosUsados.textContent += numeroIntroducido + ' ';
+
+        if (numeroIntroducido === numeroAleatorio) {
+          ultimoUsado.textContent = 'Perfecto! Lo has conseguido!';
+          ultimoUsado.style.backgroundColor = 'green';
+          compuebaAltoBajo.textContent = '';
+          setGameOver();
+        } else if (contadorIntentos === 10) {
+          ultimoUsado.textContent = '!!!FIN DE JUEGO!!!';
+          setGameOver();
+        } else {
+          ultimoUsado.textContent = 'Error!';
+          ultimoUsado.style.backgroundColor = 'red';
+          if(numeroIntroducido < numeroAleatorio) {
+            compuebaAltoBajo.textContent = 'Número demasiado bajo!';
+          } else if(numeroIntroducido > numeroAleatorio) {
+            compuebaAltoBajo.textContent = 'Número demasiado alto!';
+          }
+        }
+
+        contadorIntentos++;
+        cajaNumero.value = '';
+        cajaNumero.focus();
+      }
+      
+      botonEnvio.addEventListener('click', compruebaNumero); //el boton llama al evento click y cuando se clicka se ejecuta la funcion compruebanumero
+      
+      function setGameOver() {
+        cajaNumero.disabled = true;
+        botonEnvio.disabled = true;
+        botonReset = document.createElement('button'); //crea un boton
+        botonReset.textContent = 'Comienza un nuevo juego';
+        document.body.appendChild(botonReset); //coloca el boton al final del documento
+        botonReset.addEventListener('click', resetJuego); //desde el boton llama a la funcion resetJuego
+      }
+      
+      function resetJuego() {
+        contadorIntentos = 1; //ponemos el contador a 1
+
+        var resetParas = document.querySelectorAll('.resultParas p');
+        for (var i = 0 ; i < resetParas.length ; i++) {
+          resetParas[i].textContent = '';
+          cajaNumero.focus();
+        } //borramos todos los textos donde indicabamos los números usados
+
+        botonReset.parentNode.removeChild(botonReset); //borra el boton de reset para que el usuario no lo pueda usar ahora
+
+        cajaNumero.disabled = false;
+        botonEnvio.disabled = false;
+        cajaNumero.value = '';
+        cajaNumero.focus();
+
+        ultimoUsado.style.backgroundColor = 'white';
+
+        numeroAleatorio = Math.floor(Math.random() * 100) + 1; //vuelve a generar un nuevo numero
+      }
+    
+    </script>
+  </body>
+</html>
