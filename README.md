@@ -18,5 +18,3 @@
 
 - [X] Juego Adivina el número: El usuario debe adivinar un número del 1-100. [Ir a juego  :video_game:](https://mariarte.github.io/HAB--Mod2-Javascript/Actividades%20Extra%20Propias/Juego%20adivina%20el%20numero)
 
-- [X] Ejercicio FizzBuzz: El usuario debe adivinar un número del 1-100. [Ir a juego  :video_game:](https://mariarte.github.io/HAB--Mod2-Javascript/18--Ejercicios%20Repaso/fizzbuzz.js)
-
